@@ -10,19 +10,11 @@
 |
 |	http://example.com/
 |
-| WARNING: You MUST set this value!
-|
-| If it is not set, then CodeIgniter will try guess the protocol and path
-| your installation, but due to security concerns the hostname will be set
-| to $_SERVER['SERVER_ADDR'] if available, or localhost otherwise.
-| The auto-detection mechanism exists only for convenience during
-| development and MUST NOT be used in production!
-|
-| If you need to allow multiple domains, remember that this file is still
-| a PHP script and you can easily do that on your own.
+| If this is not set then CodeIgniter will guess the protocol, domain and
+| path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:80/mailU/';
+$config['base_url']	= 'http://localhost:80/appCorreoU/';
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +26,7 @@ $config['base_url']	= 'http://localhost:80/mailU/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -162,8 +154,8 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 | use segment based URLs.
 |
 */
-$config['allow_get_array']		= TRUE;
-$config['enable_query_strings'] = FALSE;
+$config['allow_get_array']		= FALSE;
+$config['enable_query_strings'] = TRUE;
 $config['controller_trigger']	= 'c';
 $config['function_trigger']		= 'm';
 $config['directory_trigger']	= 'd'; // experimental not currently in use
@@ -232,7 +224,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'hola';
 
 /*
 |--------------------------------------------------------------------------

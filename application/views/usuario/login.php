@@ -1,4 +1,4 @@
-<div class="page-header"><center><h1>UWebUMail</center></h1></div>
+<div class="page-header"><center><h1>WebUMail</center></h1></div>
 
 
 <div class="container">
