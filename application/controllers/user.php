@@ -2,17 +2,19 @@
 
 class User extends CI_Controller {
 
-	
+
 	public function index()
 	{
 		$data['title'] = 'Pagina Inicio';
 		$this->load->view('Pantillas/Header', $data);
+
 		$this->load->view('usuario/login');
 		$this->load->view('Pantillas/Footer');
 	}
 	public function login(){
 		$data['title'] = 'Pagina Inicio';
 		$this->load->view('Pantillas/Header', $data);
+		$this->load->view('main_nav');
 		$this->load->view('usuario/login');
 		$this->load->view('Pantillas/Footer');
 	}
@@ -24,6 +26,7 @@ class User extends CI_Controller {
 
 	}
 	public function insert(){
+
 
 			$pas = $this->input->post('npassword'); 
 			$email = $this->input->post('ncorreo');
@@ -41,9 +44,23 @@ class User extends CI_Controller {
 				);
    		
 			$this->load->model('model_user','user');
-			$id = $this->user->insert($data);
+			$check_user = $this->user->insersion($data);
+
+			if (!empty($check_user)){
+					
+					$data = array('is_logued_in' => TRUE,
+						'user_id' => $check_user->id,
+						'username' => $check_user->name,
+						'email' => $check_user->email,
+						'code' => $check_user->code
+						);
+					$this->session->set_userdata($data);
+					
+			}else{
+				redirect(base_url()."user/registrar");
+			}
 			
-		$urln = base_url()."user/envioCorreo/?code=$randcode&mail=$email&id=$id";
+		$urln = base_url()."user/envioCorreo/?code=$randcode";
 		
 		redirect($urln);
 		
@@ -71,11 +88,25 @@ class User extends CI_Controller {
 				$emails= $this->correo->getAllBySalida($id,$pendiente);
 				$data['emails'] = $emails;
 				$enviado ="Enviado";
-				$emailss = $this->correo->getAllByEnviado($id,$enviado);
-				$data['emailss'] = $emailss;
+				$emaile = $this->correo->getAllByEnviado($id,$enviado);
+				$data['emaile'] = $emaile;
 				
+				$check_user = $this->user->getSession($id);
+
+			if (!empty($check_user)){
+					
+					$session_data = array('is_loged' => TRUE,
+						'user_id' => $check_user->id,
+						'username' => $check_user->name,
+						'email' => $check_user->email,
+						);
+					$this->session->set_userdata('logged_in', $session_data);
+					
+					
+			}
 				
 				$this->load->view('Pantillas/Header', $data);
+				$this->load->view('correo_nav');
          		$this->load->view('vcorreos', $data);
          		$this->load->view('Pantillas/Footer');
 
@@ -125,7 +156,8 @@ class User extends CI_Controller {
 		$mail->Port = 465; 
 
 		//$email = $this->input->post('ncorreo');
-		$email = $_REQUEST['mail'];
+		//$email = $_REQUEST['mail'];
+		$email = $this->session->userdata('email');
 		
 
 		$mail->From = $email; 
@@ -133,8 +165,10 @@ class User extends CI_Controller {
 		$mail->Subject = "Notificacion";
 		$mail->AltBody = "Este es un mensaje";  
 		
-		$code = $_REQUEST['code'];
-		$id = $_REQUEST['id'];
+		//$code = $_REQUEST['code'];
+		//$id = $_REQUEST['id'];
+		$code = $this->session->userdata('code');
+		$id = $this->session->userdata('user_id');
 		$link = base_url()."user/verificar/?code=$code&id=$id";
 		
 		$mail->MsgHTML("<p>Dale click para verificar tu cuenta</p><a href=$link>Verificar codigo</a>"); 
@@ -145,6 +179,7 @@ class User extends CI_Controller {
 		
 		$exito = $mail->Send(); // Envía el correo.
 
+		$this->session->unset_userdata('data');
 
 		if($exito){
 			
@@ -157,7 +192,12 @@ class User extends CI_Controller {
 		$urln = base_url()."user/vcorreos";
 		redirect($urln);	
 	}
-	
+	public  function logout()
+	{
+		$this->session->unset_userdata('data');
+		return redirect('user/login');
+
+	}
 	
 }
 

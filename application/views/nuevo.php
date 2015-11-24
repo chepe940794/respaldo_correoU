@@ -8,8 +8,7 @@
 		<br/>
 <div class="container ">
 
-  <form class="form-horizontal" method="POST" action="<?php echo base_url();?>correo/insert/?id=<?php
-  echo $_REQUEST['id'];?>">
+  <form class="form-horizontal" method="POST" action="<?php echo base_url();?>correo/insert/ ?>">
    <div class="form-group">
     <label  class="col-xs-4 control-label">Destinario :</label>
     <div class="col-xs-4">
@@ -42,7 +41,7 @@
   <div class="form-group">
     <div class="col-sm-offset-4 col-xs-4" >
       
-      <a class="btn btn-danger btn-lg btn-block" href="<?php echo base_url();?>correo/vista/?id=<?php echo $_REQUEST['id'];?>">Cancelar</a>
+      <a class="btn btn-danger btn-lg btn-block" href="<?php echo base_url();?>correo/vista/ ?>">Cancelar</a>
       </form>
     </div>
 </form>

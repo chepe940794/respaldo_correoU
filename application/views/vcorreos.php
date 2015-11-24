@@ -1,25 +1,24 @@
-
-<div class="container" >
+ <!-- ><div class="container" >
   <div class="page-header" ><h1>Correos</h1></div>
-      <!-- Nav tabs -->
+      <!-- 
       
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#salida" aria-controls="salida" role="tab" data-toggle="tab">Salida</a></li>
     <li role="presentation"><a href="#enviados" aria-controls="enviados" role="tab" data-toggle="tab">Enviados</a></li>
     <li role="presentation"><a href="#salir" aria-controls="salir" role="tab" data-toggle="tab">Salir</a></li>
   </ul>
-
-  <!-- Tab panes -->
+ -->
+  
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="salida">
       <br/>
      
       
-      <a href="<?php echo base_url();?>correo/nuevo/?id=<?php echo $id?>" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nuevo</a>
+      <a href="<?php echo base_url();?>correo/nuevo/ ?>" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nuevo</a>
        
       <br/>
       <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-bordered">
         <thead>
             <tr>
               <th>ID</th>
@@ -68,7 +67,7 @@
         </thead>
         <tbody>
           
-         <?php foreach ($emailss as $emailv) { ?>
+         <?php foreach ($emaile as $emailv) { ?>
             
             <tr>
               <td><?php echo $emailv['id']; ?></td>

@@ -9,7 +9,7 @@ $password = '1q2w3e4r';
 
 	function getCorreos($servername,$user,$password){
 		try {
-    		$conn = new PDO("mysql:host=$servername;dbname=correos", $user,$password);
+    		$conn = new PDO("mysql:host=$servername;dbname=appcorreo", $user,$password);
     // set the PDO error mode to exception
     		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     		echo "Connected successfully" . "\n"; 
@@ -27,7 +27,7 @@ $password = '1q2w3e4r';
     }
     function getUsers($servername,$user,$password){
     	try {
-    		$conn = new PDO("mysql:host=$servername;dbname=correos", $user,$password);
+    		$conn = new PDO("mysql:host=$servername;dbname=appcorreo", $user,$password);
    
     	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     	echo "Connected successfully" . "\n"; 
@@ -75,7 +75,7 @@ $password = '1q2w3e4r';
 			$mail->SMTPSecure = "ssl"; 
 			$mail->Host = "smtp.gmail.com"; // SMTP a utilizar. Por ej. smtp.elserver.com
 			$mail->Username = "carlossalazar1307@gmail.com"; 
-			$mail->Password = "meco1307*"; 
+			$mail->Password = "meco1307"; 
 			$mail->Port = 465; 
 			
     		
@@ -98,8 +98,8 @@ $password = '1q2w3e4r';
 		try {
 			$servername= '127.0.0.1';
 			$user = 'root';
-			$password = '';
-    		$conn = new PDO("mysql:host=$servername;dbname=correos", $user,$password);
+			$password = '1q2w3e4r';
+    		$conn = new PDO("mysql:host=$servername;dbname=appcorreo", $user,$password);
     // set the PDO error mode to exception
     		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     		echo "Connected successfully" . "\n"; 

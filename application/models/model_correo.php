@@ -5,7 +5,7 @@
 		public function insert($data){
 			$this->db->insert('emails',$data);
 		}
-
+		
 		public function getAllBySalida($id,$pendiente){
 
         $consulta="SELECT `id`,`destinatario`,`asunto`,`mensaje` FROM `emails` WHERE iduser= '$id' and estado ='$pendiente'";

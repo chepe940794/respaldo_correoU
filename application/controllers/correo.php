@@ -6,17 +6,22 @@ class Correo extends CI_Controller {
 	{
 		$data['title'] = 'Pagina Nuevo Correo';
 		$this->load->view('Pantillas/Header', $data);
+		$this->load->view('correo_nav');
 		$this->load->view('nuevo');
 		$this->load->view('Pantillas/Footer');
 	}
 
 	public function insert()
 	{
+		$this->load->model('model_correo','correo');
 		$email = $this->input->post('nemail'); 
 		$asunto = $this->input->post('nasunto');
 		$mensaje = $this->input->post('nmensaje');
 			
-		$id = $_REQUEST['id'];	
+		if(isset($this->session->userdata['logged_in'])){
+
+			$id = $this->session->userdata['user_id'];
+		}
    			$data  = array(
 
 				
@@ -27,10 +32,10 @@ class Correo extends CI_Controller {
 				'estado' => 'Pendiente',
 				);
    		
-			$this->load->model('model_correo','correo');
+			
 			$this->correo->insert($data);
 			
-			$urln = base_url()."correo/vista/?id=$id";
+			$urln = base_url()."correo/vista/";
 			redirect($urln);
 	}
 	public function editar(){
@@ -94,11 +99,12 @@ class Correo extends CI_Controller {
 				$emails= $this->correo->getAllBySalida($id,$pendiente);
 				$data['emails'] = $emails;
 				$enviado ="Enviado";
-				$emailss = $this->correo->getAllByEnviado($id,$enviado);
-				$data['emailss'] = $emailss;
+				$emaile = $this->correo->getAllByEnviado($id,$enviado);
+				$data['emaile'] = $emaile;
 				
 				
 				$this->load->view('Pantillas/Header', $data);
+				$this->load->view('correo_nav');
          		$this->load->view('vcorreos', $data);
          		$this->load->view('Pantillas/Footer');
 
