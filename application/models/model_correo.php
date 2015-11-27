@@ -22,9 +22,9 @@
     
 
 		}
-		public function getEmailId($cid){
+		public function getEmailId($cid,$id){
 
-			$consulta='SELECT * FROM `emails` WHERE id ='.$cid;
+			$consulta="SELECT * FROM `emails` WHERE id = '$cid' and iduser = '$id'" ;
         	$query = $this->db->query("$consulta");
         	return $query->result_array();
 		}
@@ -41,10 +41,16 @@
         	return $query->result_array();
 
 		}
-		public function delete($cid){
+		public function delete($cid,$id){
 
 			$this->db->where('id',$cid);
+			$this->db->where('iduser',$id);
 			$this->db->delete('emails');
+			if ($this->db->affected_rows() == true) {
+				return true;
+			}else{
+				return false;
+			}
 
 		}
 

@@ -2,7 +2,7 @@
 
 class Correo extends CI_Controller {
 
-	public function nuevo()
+	public function nuevo() //Método para crear nuevo correo
 	{
 		$data['title'] = 'Pagina Nuevo Correo';
 		$this->load->view('Pantillas/Header', $data);
@@ -17,14 +17,15 @@ class Correo extends CI_Controller {
 		$email = $this->input->post('nemail'); 
 		$asunto = $this->input->post('nasunto');
 		$mensaje = $this->input->post('nmensaje');
+
+		$session =  $this->session->userdata['logged_in'];
+
 			
-		if(isset($this->session->userdata['logged_in'])){
+		if($session["is_loged"] == true){
 
-			$id = $this->session->userdata['user_id'];
-		}
-   			$data  = array(
+			$id = $session['user_id'];
 
-				
+			$data  = array(
 				'destinatario' =>  $email,
 				'iduser' => $id , 
 				'mensaje' => $mensaje,
@@ -32,35 +33,55 @@ class Correo extends CI_Controller {
 				'estado' => 'Pendiente',
 				);
    		
-			
 			$this->correo->insert($data);
-			
 			$urln = base_url()."correo/vista/";
 			redirect($urln);
+		}
+   			
+		else{
+			$urln = base_url()."user/login";
+			redirect($urln);
+
+		}
 	}
+
 	public function editar(){
+		$session =  $this->session->userdata['logged_in'];
 
+		if($session["is_loged"] == true){
+		$id = $session['user_id'];
 		$cid = $_REQUEST['cid'];
-
 		$this->load->model('model_correo','correo');
-		$correos = $this->correo->getEmailId($cid);
+		$correos = $this->correo->getEmailId($cid,$id);
 		$data['email'] = $correos;
+		
+			if (!empty($data['email'])) {
+				$data['title'] = 'Pagina Editar Correo';
+				$this->load->view('Pantillas/Header', $data);
+				$this->load->view('correo_nav');
+				$this->load->view('editar',$data);
+				$this->load->view('Pantillas/Footer');
+			}else{
+				$urln = base_url()."correo/vista";
+			redirect($urln);
+			}
+		
+		}else{
 
-		$data['title'] = 'Pagina Editar Correo';
-		$id = $_REQUEST['id'];
-		$data['id'] = $id;
-		$this->load->view('Pantillas/Header', $data);
-		$this->load->view('editar',$data);
-		$this->load->view('Pantillas/Footer');
-
-
+			$urln = base_url()."user/login";
+			redirect($urln);
+		}
 	} 
+
 	public function update(){
 		$email = $this->input->post('nemail'); 
 		$asunto = $this->input->post('nasunto');
 		$mensaje = $this->input->post('nmensaje');
-			
-		$idc = $_REQUEST['cid'];	
+		$session =  $this->session->userdata['logged_in'];
+
+		if($session["is_loged"] == true){
+		$idc = $session['user_id'];	
+
    			$data  = array(
 				
 				'destinatario' =>  $email, 
@@ -72,29 +93,52 @@ class Correo extends CI_Controller {
    		
    		$this->load->model('model_correo','correo');
    		$this->correo->update($idc,$data);
-   		$id = $_REQUEST['id'];
-   		$urln = base_url()."correo/vista/?id=$id";
+   		
+   		$urln = base_url()."correo/vista";
    		redirect($urln);
+   		}
+   		else{
+
+   			$urln = base_url()."user/login";
+			redirect($urln);
+   		}
 	}
 
 	public function eliminar(){
+		$session =  $this->session->userdata['logged_in'];
+
+		if($session["is_loged"] == true){
+		$id = $session['user_id'];
 		$cid = $_REQUEST['cid'];
 
 		$this->load->model('model_correo','correo');
-		$this->correo->delete($cid);
-		$id= $_REQUEST['id'];
-		$urln = base_url()."correo/vista/?id=$id";
+		$v = $this->correo->delete($cid,$id);
+		if ($v == 1) {
+			$urln = base_url()."correo/vista/";
 		redirect($urln);
+		}else{
+			$urln = base_url()."correo/vista/";
+		redirect($urln);
+		}
+		
+		
+		}else{
+			$urln = base_url()."user/login";
+			redirect($urln);
+		}
 	}
 
 	public function vista(){
+			$session =  $this->session->userdata['logged_in'];
+
+			if($session["is_loged"] == true){
 
 				$this->load->model('model_correo','correo');
-				$id = $_REQUEST['id'];	
+				$id = $session['user_id'];	
 				$data['title'] = "Pagina Principal";
 				//$data = $this->correo->getId($idc);
 				$pendiente = "Pendiente";
-				$data['id']=$id;
+				//$data['id']=$id;
 				
 				$emails= $this->correo->getAllBySalida($id,$pendiente);
 				$data['emails'] = $emails;
@@ -107,6 +151,12 @@ class Correo extends CI_Controller {
 				$this->load->view('correo_nav');
          		$this->load->view('vcorreos', $data);
          		$this->load->view('Pantillas/Footer');
+         	}else{
+         		$urln = base_url()."user/login";
+			redirect($urln);
+         	}
 
 	}
 }
+
+

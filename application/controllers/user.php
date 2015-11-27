@@ -7,7 +7,7 @@ class User extends CI_Controller {
 	{
 		$data['title'] = 'Pagina Inicio';
 		$this->load->view('Pantillas/Header', $data);
-
+		$this->load->view('main_nav');
 		$this->load->view('usuario/login');
 		$this->load->view('Pantillas/Footer');
 	}
@@ -113,19 +113,12 @@ class User extends CI_Controller {
 
 				
          	}else{
-         		$data['title'] ="Pagina Error";
-         		
-         		$data['mensaje'] = "Usuario  no verificado";
-         		$this->load->view('Pantillas/Header', $data); 
-         		$this->load->view('errorlogin',$data);
-         		$this->load->view('Pantillas/Footer');
+         		$urln = base_url()."user/login";
+			redirect($urln);
          	}
 		}else{
-				$data['title'] ="Pagina Error";
-				$data['mensaje'] = "Usuario  contraseña incorrecta";
-				$this->load->view('Pantillas/Header', $data);
-         		$this->load->view('errorlogin',$data);
-         		$this->load->view('Pantillas/Footer');
+				$urln = base_url()."user/login";
+			redirect($urln);
 		 		
 		}
 		
@@ -195,6 +188,7 @@ class User extends CI_Controller {
 	public  function logout()
 	{
 		$this->session->unset_userdata('data');
+		$this->session->sess_destroy();
 		return redirect('user/login');
 
 	}

@@ -1,20 +1,11 @@
- <!-- ><div class="container" >
-  <div class="page-header" ><h1>Correos</h1></div>
-      <!-- 
-      
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#salida" aria-controls="salida" role="tab" data-toggle="tab">Salida</a></li>
-    <li role="presentation"><a href="#enviados" aria-controls="enviados" role="tab" data-toggle="tab">Enviados</a></li>
-    <li role="presentation"><a href="#salir" aria-controls="salir" role="tab" data-toggle="tab">Salir</a></li>
-  </ul>
- -->
-  
-  <div class="tab-content">
+
+<div class='container'>
+<div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="salida">
       <br/>
      
       
-      <a href="<?php echo base_url();?>correo/nuevo/ ?>" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nuevo</a>
+      <a href="<?php echo base_url();?>correo/nuevo" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Nuevo</a>
        
       <br/>
       <div class="table-responsive">
@@ -25,6 +16,7 @@
               <th>Destinatario</th>
               <th>Asunto</th>
               <th>Mensaje</th>
+              <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -38,10 +30,9 @@
               <td><?php echo $email['mensaje']; ?></td>
               <td>
 
-                  <a href="<?php echo base_url();?>correo/editar/?cid=<?php echo $email['id']?>&id=<?php echo $id?>"><span class="glyphicon glyphicon-edit" >Editar</a>
-              </td>
-              <td>
-                  <a href="<?php echo base_url();?>correo/eliminar/?cid=<?php echo $email['id']?>&id=<?php echo $id?>" onClick="return confirm('Desea eliminar el correo ?');"><span class="glyphicon glyphicon-trash">Eliminar</a>
+                  <a href="<?php echo base_url();?>correo/editar/?cid=<?php echo $email['id']?>"><span class="glyphicon glyphicon-edit" >Editar</a>
+            
+                  |<a href="<?php echo base_url();?>correo/eliminar/?cid=<?php echo $email['id']?>" onClick="return confirm('Desea eliminar el correo ?');"><span class="glyphicon glyphicon-trash">Eliminar</a>
               </td>
               
             </tr>
@@ -63,6 +54,7 @@
               <th>Destinatario</th>
               <th>Asunto</th>
               <th>Mensaje</th>
+              <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -76,7 +68,7 @@
               <td><?php echo $emailv['mensaje']; ?></td>
               
               <td>
-                  <a href="<?php echo base_url();?>correo/eliminar/?cid=<?php echo $emailv['id']?>&id=<?php echo $id?>" onClick="return confirm('Desea eliminar el correo ?');"><span class="glyphicon glyphicon-trash">Eliminar</a>
+                  <a href="<?php echo base_url();?>correo/eliminar/?cid=<?php echo $emailv['id']?>" onClick="return confirm('Desea eliminar el correo ?');"><span class="glyphicon glyphicon-trash">Eliminar</a>
               </td>
               
             </tr>
@@ -90,5 +82,8 @@
         <center><a href="<?php echo base_url();?>user/login" class="btn btn-danger"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Logout</a>
       </center>
       </div>
+
+    </div>
+
 
     </div>

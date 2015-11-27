@@ -15,10 +15,10 @@
   //]]>
   	</script>
   	<script>
-	function myFunction(cid, id) {
+	function myFunction(cid) {
     if(confirm("Desea Eliminar el correo"))
 	{ 
-		var link = base_url()+"correo/eliminar/?cid="+ $cid +"&id="+ $id;
+		var link = base_url()+"correo/eliminar/?cid="+ $cid;
 		document.writeln(link);
 		window.location(link);
 	}	
@@ -27,7 +27,7 @@
 </head>
 
 <body >
-<div class="wrapper">
+<div class="container">
 
 
 
