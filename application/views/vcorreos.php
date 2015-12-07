@@ -30,7 +30,7 @@
               <td><?php echo $email['mensaje']; ?></td>
               <td>
 
-                  <a href="<?php echo base_url();?>correo/editar/?cid=<?php echo $email['id']?>"><span class="glyphicon glyphicon-edit" >Editar</a>
+                  <a href="<?php echo base_url();?>correo/editar/?cid=<?php echo $email['id']?>"><span class="glyphicon glyphicon-edit">Editar</a>
             
                   |<a href="<?php echo base_url();?>correo/eliminar/?cid=<?php echo $email['id']?>" onClick="return confirm('Desea eliminar el correo ?');"><span class="glyphicon glyphicon-trash">Eliminar</a>
               </td>

@@ -1,10 +1,11 @@
 
-<footer class="container">
+<footer >
+	<div class="container">
 	<div class="row">
 		<div class="span6"><center>2015 Todos los Derechos Reservados</div>
 		
 	</div>
-
+	</div>
 
 </footer>
 </div>

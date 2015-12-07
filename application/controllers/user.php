@@ -134,6 +134,7 @@ class User extends CI_Controller {
 	}
 	
 	public function envioCorreo(){
+		//Método de envío de correo para verificar el registro de un nuevo usuario
 
 		include("class.phpmailer.php");
 		include("class.smtp.php"); 

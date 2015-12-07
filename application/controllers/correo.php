@@ -79,8 +79,9 @@ class Correo extends CI_Controller {
 		$mensaje = $this->input->post('nmensaje');
 		$session =  $this->session->userdata['logged_in'];
 
+
 		if($session["is_loged"] == true){
-		$idc = $session['user_id'];	
+		$id = $session['user_id'];	
 
    			$data  = array(
 				
@@ -89,6 +90,7 @@ class Correo extends CI_Controller {
 				'asunto' => $asunto,
 				);
 
+   		$idc = $_REQUEST['cid'];
    		
    		
    		$this->load->model('model_correo','correo');
