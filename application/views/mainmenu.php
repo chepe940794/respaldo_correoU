@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="form-container">
-<nav class="container"> 
+<nav class="container">
 	<div class="btn-group">
 	<button type="button" class="btn btn-default">Nuevo</button>
   	<button type="button" class="btn btn-default">Mensajes Salida</button>
@@ -26,7 +26,7 @@
 
 
 <div class="container">
-<p><center>2015 Todos los Derechos Reservados</center></p>
+<p><center>2016 Todos los Derechos Reservados</center></p>
 </div>
 
 
